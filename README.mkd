@@ -1,0 +1,12 @@
+# game10 - Tetris
+
+My first game. Builded with C and some legacy OpenGL functions. Terrible stuff... But no OpenGL 3.x+ love with VirtualBox :(
+
+For building this horrible sample you need a working C compiler, OpenGL libraries and the GLFW3 library. Only tried to compile this with the Fedora 20 and clang.
+
+A C-tutorial that helped to create this (dbg.h, minunit.h and so on): [Learn C The Hard Way](http://c.learncodethehardway.org/) 
+
+Copyright © 2014 Mika Kumanto <mika.kumanto@gmail.com>
+This work is free. You can redistribute it and/or modify it under the
+terms of the Do What The Fuck You Want To Public License, Version 2,
+as published by Sam Hocevar. See the COPYING file for more details.
