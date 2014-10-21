@@ -1,4 +1,0 @@
---memcheck:leak-check=full
-
---suppressions=glfw.supp
---suppressions=vbox.supp

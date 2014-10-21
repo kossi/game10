@@ -30,6 +30,7 @@
 
 # Valgrind suppression files
 *.supp
+.valgrindrc
 
 # Tests
 tests*.log
