@@ -111,7 +111,7 @@ int start(long seed){
         ptick = 0;
       }
     }
-
+	 
     draw(window, state);
     glfwSwapBuffers(window);
 
