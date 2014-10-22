@@ -20,9 +20,9 @@ enum Piece next_piece(struct State *state){
 
 struct Tetromino *tetromino_create(enum Piece kind){
   struct Tetromino *t = malloc(sizeof(struct Tetromino));
-  memset(t->shape, -1, sizeof(t->shape));
   if(!t) return NULL;
 
+  memset(t->shape, -1, sizeof(t->shape));
   t->kind = kind;
 
   switch(kind){

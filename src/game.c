@@ -3,7 +3,6 @@
 
 #include "game.h"
 #include "render.h"
-#include "tetris.h"
 
 #include "dbg.h"
 
@@ -83,7 +82,7 @@ int start(long seed){
 
   glfwSetWindowUserPointer(window, state);
  
-  double time = glfwGetTime(), last_time = glfwGetTime();
+  double time, last_time = glfwGetTime();
   int frames = 0;
   int ptick = 0;
   

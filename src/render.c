@@ -1,7 +1,5 @@
 #include "render.h"
 
-#include "dbg.h"
-
 
 void grid(){
   glColor3f(0.f, 0.f, 0.f);
@@ -93,7 +91,7 @@ void draw(GLFWwindow *window, struct State *state){
   int width, height;
   glfwGetFramebufferSize(window, &width, &height);
   
-  glViewport(0.0f, 0.0f, width, height);
+  glViewport(0, 0, width, height);
   glClearColor(1.f,1.f,1.f,1.f);
   
   glClear(GL_COLOR_BUFFER_BIT);
@@ -113,7 +111,7 @@ void draw(GLFWwindow *window, struct State *state){
   for(int i = 0; i < T_ROWS; ++i){
     for(int j = 0; j < T_COLS; ++j){
       if(state->grid[i][j] >= 0){
-        block(i, j, state->grid[i][j], -1.0f, state->party);
+        block(i, j, (enum Piece) state->grid[i][j], -1.0f, state->party);
       }
     }
   }
