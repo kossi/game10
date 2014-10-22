@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 #ifdef _MSC_VER
+#define snprintf _snprintf
 #define STIN static __inline
 #else
 #define STIN static inline
@@ -57,7 +58,7 @@ struct Result{
   uint64_t state;
 };
 // Xorshift64
-static inline struct Result xorshift_next(uint64_t state){
+STIN struct Result xorshift_next(uint64_t state){
   state ^= state >> 12;
   state ^= state << 25;
   state ^= state >> 27;
