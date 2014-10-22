@@ -94,8 +94,9 @@ int start(long seed){
       enum TickResult res = tetris_tick(state);
       if(res == game_over)   
        glfwSetWindowShouldClose(window, GL_TRUE);
+      else if(res == move_down && state->party)
+        ptick++;
       
-
       char title[256];
       double diffms = (time - last_time)*1000;
       snprintf(title, 255,"Score: %i FPS: %3.0f LAT: %3.2fms",
@@ -105,17 +106,16 @@ int start(long seed){
 
       last_time = glfwGetTime();
       frames = 0;
-      if(ptick > 4){
+      if(ptick > 6){
         state->party = false;
         ptick = 0;
       }
-      if(res == move_down && state->party)
-        ptick++;
     }
 
     draw(window, state);
     glfwSwapBuffers(window);
-        frames++;
+
+    frames++;
   }
 
   glfwDestroyWindow(window);

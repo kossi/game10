@@ -82,8 +82,8 @@ void block(int r, int c, enum Piece kind, float i, bool party){
        } glEnd();
       break;     
     case kind_T:
-      if(party) glColor3f(.0f, 0.f, 1.f);
-        box(x, y, 2.f);
+      if(party) glColor3f(1.f, 1.f, .0f);
+      box(x, y, 2.f);
       break;
   }
 }
@@ -108,9 +108,7 @@ void draw(GLFWwindow *window, struct State *state){
   glEnable(GL_LINE_SMOOTH);
   glHint(GL_LINE_SMOOTH_HINT,  GL_NICEST);
 
-  
   grid();
-
   
   for(int i = 0; i < T_ROWS; ++i){
     for(int j = 0; j < T_COLS; ++j){

@@ -22,48 +22,44 @@ struct Tetromino *tetromino_create(enum Piece kind){
   struct Tetromino *t = malloc(sizeof(struct Tetromino));
   memset(t->shape, -1, sizeof(t->shape));
   if(!t) return NULL;
+
+  t->kind = kind;
+
   switch(kind){
     case kind_J:
-      t->kind = kind;
       for(int i = 0; i < 3; ++i)
         t->shape[1][i] = (int) t->kind;
       t->shape[2][2] = (int) t->kind;
       break;
     case kind_L:
-      t->kind = kind;
       for(int i = 0; i < 3; ++i)
         t->shape[1][i] = (int) t->kind;
       t->shape[2][0] = (int) t->kind;
       break;
     case kind_O:
-      t->kind = kind;
       for(int i = 0; i < 2; ++i){
         t->shape[0][i] = (int) t->kind;
         t->shape[1][i] = (int) t->kind;
       }
       break;
     case kind_S:
-      t->kind = kind;
       t->shape[1][1] = (int) t->kind; 
       t->shape[1][2] = (int) t->kind;
       t->shape[2][0] = (int) t->kind;    
       t->shape[2][1] = (int) t->kind;       
       break;
     case kind_T:
-      t->kind = kind;
       for(int i = 0; i < 3; ++i)
         t->shape[1][i] = (int) t->kind;
       t->shape[2][1] = (int) t->kind;
       break;
     case kind_Z:
-      t->kind = kind;
       for(int i = 1; i < 3; ++i){
         t->shape[i][i] = (int) t->kind; 
         t->shape[i][i-1] = (int) t->kind; 
       }
       break;
     default:
-      t->kind = kind_I;
       for(int i = 0; i < 4; ++i)
         t->shape[2][i] = (int) t->kind;
       break;
@@ -134,7 +130,7 @@ bool tetris_exit(struct State *state){
 }
 
 
-bool collosion_detection(struct State *state){
+bool collision_detection(struct State *state){
   for(int i = 0, j, col, row = state->current->pos.top; i < 4; i++, row++){
     j = 0;
     for(col = state->current->pos.left; j < 4; j++, col++){  
@@ -173,7 +169,7 @@ int row_clearing(struct State *state, int clear){
 enum TickResult tetris_tick(struct State *state){
   state->current->pos.top++;
   
-  if(collosion_detection(state)){
+  if(collision_detection(state)){
     state->current->pos.top--;
     for(int i = 0, j, col, row = state->current->pos.top; i < 4; i++, row++){
       j = 0;
@@ -193,7 +189,7 @@ enum TickResult tetris_tick(struct State *state){
     state->last->next = t;
     state->last = t;
     state->current->pos.top = 0;
-    if(collosion_detection(state)) 
+    if(collision_detection(state)) 
       return game_over;
     else{
       int clear = row_clearing(state, 0);
@@ -241,7 +237,7 @@ void rotate_clockwise(struct State *state, int length){
     }
   }
 
-  if(collosion_detection(state)){
+  if(collision_detection(state)){
     for(int i = 0; i < 4; ++i){
       for(int j = 0; j < 4; ++j){
         state->current->shape[i][j] = old_shape[i][j];
@@ -265,9 +261,9 @@ void tetris_turn(struct State *state){
 
 void tetris_move_r(struct State *state){
   state->current->pos.left++;
-  if(collosion_detection(state)) state->current->pos.left--;
+  if(collision_detection(state)) state->current->pos.left--;
 }
 void tetris_move_l(struct State *state){
   state->current->pos.left--;
-  if(collosion_detection(state)) state->current->pos.left++;
+  if(collision_detection(state)) state->current->pos.left++;
 }
