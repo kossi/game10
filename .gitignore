@@ -34,3 +34,9 @@
 
 # Tests
 tests*.log
+
+# Binaries and folder
+lib/
+bin/
+game10
+tests/tetris_tests
