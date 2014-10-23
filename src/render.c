@@ -107,7 +107,6 @@ void draw(GLFWwindow *window, struct State *state){
   glOrtho(0.f, ((float) cols+20),((float) rows+20), 0.f,-1.f,1.f);
   
   glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity(); 
   glEnable(GL_LINE_SMOOTH);
   glHint(GL_LINE_SMOOTH_HINT,  GL_NICEST);
 
