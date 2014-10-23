@@ -3,32 +3,37 @@
 
 void grid(){
   glColor3f(0.f, 0.f, 0.f);
+  glLoadIdentity();
+  glTranslatef(10.f, 10.f, 0.f);
 
   glBegin(GL_LINES); {
-    for(int i = 20; i <= rows; i += 10){
+    for(int i = 0; i <= rows; i += 10){
       glVertex2f(0.f, i);
       glVertex2f((float) cols, i);
     }
     for(int i = 0; i <= cols; i += 10){
-      glVertex2f((float) i, 20.f);
+      glVertex2f((float) i, 0.f);
       glVertex2f(i, (float) rows);
     }
   } glEnd();
 }
 
-void box(float y, float x, float s){
+void box(float s){
   float size_max = 10.f - s;
   glBegin(GL_QUADS); {
-      glVertex2f(y+s, x+size_max);
-      glVertex2f(y+size_max, x+size_max);
-      glVertex2f(y+size_max, x+s);
-      glVertex2f(y+s, x+s);
+      glVertex2f(s, size_max);
+      glVertex2f(size_max, size_max);
+      glVertex2f(size_max, s);
+      glVertex2f(s, s);
   } glEnd();
 }
 
 void block(int r, int c, enum Piece kind, float i, bool party){
-  float y = (float) r*10;
-  float x = (float) c*10;
+  float y = (float) 10+r*10;
+  float x = (float) 10+c*10;
+  glLoadIdentity();
+  glTranslatef(x,y, 0.f);
+
   if(i >= 0.f)
     glColor3f(i, i, i); 
   else
@@ -36,52 +41,52 @@ void block(int r, int c, enum Piece kind, float i, bool party){
 
   switch(kind){
     case kind_I:
-      box(x, y, 1.0f);
+      box(1.0f);
       break;
     case kind_O:
-      box(x, y, 1.5f);
+      box(1.5f);
       break;
     case kind_L:
      glBegin(GL_TRIANGLES); {
-        glVertex2f(x+1.f, y+9.f);
-        glVertex2f(x+9.f, y+9.f);
-        glVertex2f(x+1.f, y+1.f); 
+        glVertex2f(1.f, 9.f);
+        glVertex2f(9.f, 9.f);
+        glVertex2f(1.f, 1.f);
       } glEnd();
       break;
     case kind_J:
       glBegin(GL_TRIANGLES); {
-        glVertex2f(x+9.f, y+1.f);
-        glVertex2f(x+1.f, y+1.f);
-        glVertex2f(x+9.f, y+9.f); 
+        glVertex2f(9.f, 1.f);
+        glVertex2f(1.f, 1.f);
+        glVertex2f(9.f, 9.f);
       } glEnd();
       break;
     case kind_S:
         glBegin(GL_TRIANGLES); {
-          glVertex2f(x+1.f, y+1.f);
-          glVertex2f(x+8.f, y+1.f);
-          glVertex2f(x+1.f, y+8.f);
+          glVertex2f(1.f, 1.f);
+          glVertex2f(8.f, 1.f);
+          glVertex2f(1.f, 8.f);
 
           if(party) glColor3f(1.f, 0.f, 0.f);
-          glVertex2f(x+9.f, y+2.f);
-          glVertex2f(x+2.f, y+9.f);
-          glVertex2f(x+9.f, y+9.f); 
+          glVertex2f(9.f, 2.f);
+          glVertex2f(2.f, 9.f);
+          glVertex2f(9.f, 9.f);
         } glEnd();
       break;    
     case kind_Z:
         glBegin(GL_TRIANGLES); {
-          glVertex2f(x+1.f, y+1.f);
-          glVertex2f(x+1.f, y+9.f);
-          glVertex2f(x+9.f, y+9.f);
+          glVertex2f(1.f, 1.f);
+          glVertex2f(1.f, 9.f);
+          glVertex2f(9.f, 9.f);
    
           if(party) glColor3f(.0f, .1f, .8f);
-          glVertex2f(x+9.f, y+1.f);
-          glVertex2f(x+9.f, y+9.f);
-          glVertex2f(x+1.f, y+1.f);
+          glVertex2f(9.f, 1.f);
+          glVertex2f(9.f, 9.f);
+          glVertex2f(1.f, 1.f);
        } glEnd();
       break;     
     case kind_T:
       if(party) glColor3f(1.f, 1.f, .0f);
-      box(x, y, 2.f);
+      box(2.f);
       break;
   }
 }
@@ -99,7 +104,7 @@ void draw(GLFWwindow *window, struct State *state){
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   
-  glOrtho(-10.f, ((float) cols+10),((float) rows+10), 10.f,-1.f,1.f);
+  glOrtho(0.f, ((float) cols+20),((float) rows+20), 0.f,-1.f,1.f);
   
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity(); 
