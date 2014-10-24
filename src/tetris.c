@@ -175,6 +175,7 @@ enum TickResult tetris_tick(struct State *state){
       j = 0;
       for(col = state->current->pos.left; j < 4; j++, col++){  
         if(state->current->shape[i][j] >= 0){
+          if(row < 2) return game_over;
           state->grid[row][col] = state->current->kind;
         }    
       }

@@ -7,12 +7,12 @@ void grid(){
   glTranslatef(10.f, 10.f, 0.f);
 
   glBegin(GL_LINES); {
-    for(int i = 0; i <= rows; i += 10){
+    for(int i = 20; i <= rows; i += 10){
       glVertex2f(0.f, i);
       glVertex2f((float) cols, i);
     }
     for(int i = 0; i <= cols; i += 10){
-      glVertex2f((float) i, 0.f);
+      glVertex2f((float) i, 20.f);
       glVertex2f(i, (float) rows);
     }
   } glEnd();
@@ -104,7 +104,7 @@ void draw(GLFWwindow *window, struct State *state){
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   
-  glOrtho(0.f, ((float) cols+20),((float) rows+20), 0.f,-1.f,1.f);
+  glOrtho(0.f, ((float) cols+20),((float) rows+30), 0.f,-1.f,1.f);
   
   glMatrixMode(GL_MODELVIEW);
   glEnable(GL_LINE_SMOOTH);

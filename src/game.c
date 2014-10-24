@@ -42,7 +42,7 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action, 
 }
 
 static void resize_callback(GLFWwindow *window, int width, int height){
- if(width > MIN_RES_W || height > MIN_RES_H){ 
+ if(width < MIN_RES_W || height < MIN_RES_H){
     glfwSetWindowSize(window, MIN_RES_W, MIN_RES_H);
   }else{
     glfwSetWindowSize(window, width, height);
@@ -68,11 +68,12 @@ GLFWwindow* init(){
   glfwSetKeyCallback(window, key_callback);
   glfwSetWindowSizeCallback(window, resize_callback);
 
+
   return window;
 
 }
 
-int start(long seed){
+int start(uint64_t seed){
 
   GLFWwindow *window = init();
 
@@ -89,6 +90,7 @@ int start(long seed){
   while (!glfwWindowShouldClose(window)){
     time = glfwGetTime();
     glfwPollEvents();
+
     if(time - last_time >= 0.5f){
       enum TickResult res = tetris_tick(state);
       if(res == game_over)   
@@ -110,7 +112,7 @@ int start(long seed){
         ptick = 0;
       }
     }
-	 
+
     draw(window, state);
     glfwSwapBuffers(window);
 
